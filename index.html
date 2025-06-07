@@ -1,0 +1,469 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Royals Store</title>
+  <style>
+    /* Fonte Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
+
+    /* Variáveis CSS para paleta e espaçamentos */
+    :root {
+      --color-bg: #ffffff;
+      --color-text-primary: #111827;
+      --color-text-secondary: #6b7280;
+      --color-accent: #000000;
+      --color-accent-hover: #444444;
+      --color-hover-bg: #f9fafb;
+      --radius: 0.75rem;
+      --shadow-light: 0 1px 3px rgb(0 0 0 / 0.1);
+      --shadow-hover: 0 8px 20px rgb(0 0 0 / 0.12);
+      --transition-speed: 0.3s;
+      --max-width: 1200px;
+      --spacing-vertical: 5rem;
+    }
+
+    /* Reset e base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text-secondary);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    /* Cabeçalho fixo estilo minimalista */
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: var(--color-bg);
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: var(--shadow-light);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Logo */
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--color-text-primary);
+      letter-spacing: 0.05em;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    /* Navegação simples */
+    ul.nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul.nav-links li a {
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 1rem;
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color var(--transition-speed);
+      cursor: pointer;
+    }
+
+    ul.nav-links li a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-accent);
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s ease;
+      border-radius: 1px;
+    }
+
+    ul.nav-links li a:hover,
+    ul.nav-links li a:focus-visible {
+      color: var(--color-accent-hover);
+      outline: none;
+    }
+
+    ul.nav-links li a:hover::after,
+    ul.nav-links li a:focus-visible::after {
+      width: 100%;
+    }
+
+    /* Container principal */
+    main {
+      max-width: var(--max-width);
+      margin: var(--spacing-vertical) auto 5rem;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    /* Hero section */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-light);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      font-size: 3.5rem;
+      color: var(--color-text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+    }
+
+    .hero p {
+      font-weight: 500;
+      font-size: 1.25rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      border: none;
+      border-radius: var(--radius);
+      padding: 1rem 4rem;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.2s;
+      user-select: none;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background-color: var(--color-accent-hover);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    /* Container da tabela */
+    .table-container {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-light);
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      transition: box-shadow var(--transition-speed);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .table-container:hover,
+    .table-container:focus-within {
+      box-shadow: var(--shadow-hover);
+      outline: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+    }
+
+    thead {
+      background-color: var(--color-header-bg);
+    }
+
+    thead th {
+      text-align: left;
+      padding: 1.5rem 2.5rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      user-select: none;
+      font-size: 1.125rem;
+    }
+
+    tbody tr {
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background-color: var(--color-hover-bg);
+      box-shadow: inset 4px 0 var(--color-accent);
+    }
+
+    tbody td {
+      padding: 1.25rem 2.5rem;
+      vertical-align: middle;
+    }
+
+    tbody td.price {
+      font-weight: 700;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+
+    tbody tr:focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: -3px;
+      background-color: var(--color-hover-bg);
+      box-shadow: inset 4px 0 var(--color-accent);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 1.125rem;
+      color: var(--color-text-primary);
+      font-weight: 600;
+      margin-top: 1.5rem;
+      white-space: pre-line;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero p {
+        font-size: 1.125rem;
+      }
+      nav {
+        padding: 1rem;
+      }
+      ul.nav-links {
+        gap: 1.5rem;
+      }
+      thead th, tbody td {
+        padding: 1rem 1.5rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      ul.nav-links {
+        gap: 1rem;
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 1rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav aria-label="Navegação principal">
+      <div class="logo" tabindex="0">ROYALS STORE</div>
+      <ul class="nav-links">
+        <li><a href="#" tabindex="0">Início</a></li>
+        <li><a href="#" tabindex="0">Produtos</a></li>
+        <li><a href="#" tabindex="0">Sobre</a></li>
+        <li><a href="#" tabindex="0">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Seção principal">
+      <h1>Encontre o melhor em streaming</h1>
+      <p>Aproveite nossos pacotes especiais para streaming e serviços digitais, com preços competitivos e atendimento profissional.</p>
+      <a href="https://wa.me/5599991827705" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp para comprar">Comprar pelo WhatsApp</a>
+    </section>
+
+    <section class="table-container" aria-label="Tabela de produtos disponíveis">
+      <table role="table" aria-label="Tabela de produtos da ROYALS STORE">
+        <thead>
+          <tr>
+            <th scope="col">Produto</th>
+            <th scope="col">Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20MAX%20HBO%202%20MÊS', '_blank')">
+            <td>🎬 MAX HBO 2 MÊS</td>
+            <td class="price">R$ 9,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20MAX%20HBO%203%20MÊS', '_blank')">
+            <td>🎬 MAX HBO 3 MÊS</td>
+            <td class="price">R$ 15,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20MAX%20PRIVADA', '_blank')">
+            <td>🔒 MAX PRIVADA</td>
+            <td class="price">R$ 12,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20YOUCINE', '_blank')">
+            <td>🎥 YOUCINE</td>
+            <td class="price">R$ 21,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PRIME%20VÍDEO', '_blank')">
+            <td>▶ PRIME VÍDEO</td>
+            <td class="price">R$ 4,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PRIME%20VÍDEO%20%2B%2010%20ADICIONAIS', '_blank')">
+            <td>▶ PRIME VÍDEO + 10 ADICIONAIS</td>
+            <td class="price">R$ 13,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PRIME%20VÍDEO%20%2B%205%20ADICIONAIS', '_blank')">
+            <td>▶ PRIME VÍDEO + 5 ADICIONAIS</td>
+            <td class="price">R$ 9,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PRIME%20VÍDEO%20%2B%20MAX', '_blank')">
+            <td>▶ PRIME VÍDEO + MAX</td>
+            <td class="price">R$ 7,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PRIME%20VÍDEO%20TODOS%20ADICIONAIS%20%28SEM%20ANÚNCIO%29', '_blank')">
+            <td>🚫 PRIME VÍDEO TODOS ADICIONAIS (SEM ANÚNCIO)</td>
+            <td class="price">R$ 16,80</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20CLAROTV%206%20ADICIONAIS', '_blank')">
+            <td>📺 CLAROTV 6 ADICIONAIS</td>
+            <td class="price">R$ 12,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20DOULINGO%20%28VIA%20LINK%20SEU%20EMAIL%29', '_blank')">
+            <td>📝 DOULINGO (VIA LINK SEU EMAIL)</td>
+            <td class="price">R$ 7,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20CRUNCHYROLL', '_blank')">
+            <td>📺 CRUNCHYROLL</td>
+            <td class="price">R$ 4,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20CRUNCHYROLL%202%20MÊS', '_blank')">
+            <td>📺 CRUNCHYROLL 2 MÊS</td>
+            <td class="price">R$ 7,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20CANVA%20PRO%20ANUAL%20%28SEU%20EMAIL%29', '_blank')">
+            <td>🎨 CANVA PRO ANUAL (SEU EMAIL)</td>
+            <td class="price">R$ 21,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20CANVA%20PRO%20MENSAL%20%28SEU%20EMAIL%29', '_blank')">
+            <td>🎨 CANVA PRO MENSAL (SEU EMAIL)</td>
+            <td class="price">R$ 3,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20BRAINLY%20PLUS%20%281%20ACESSO%29', '_blank')">
+            <td>📚 BRAINLY PLUS (1 ACESSO)</td>
+            <td class="price">R$ 12,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20UNI%20TV%20MENSAL%20%28CÓDIGO%20DE%20ATIVAÇÃO%29', '_blank')">
+            <td>📺 UNI TV MENSAL (CÓDIGO DE ATIVAÇÃO)</td>
+            <td class="price">R$ 21,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PARAMOUNT', '_blank')">
+            <td>📺 PARAMOUNT</td>
+            <td class="price">R$ 4,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PARAMOUNT%203%20MÊS', '_blank')">
+            <td>📺 PARAMOUNT 3 MÊS</td>
+            <td class="price">R$ 7,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20DISNEY%20PREMIUM', '_blank')">
+            <td>🏰 DISNEY PREMIUM</td>
+            <td class="price">R$ 9,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20DISNEY%20PREMIUM%202%20MÊS', '_blank')">
+            <td>🏰 DISNEY PREMIUM 2 MÊS</td>
+            <td class="price">R$ 16,80</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20LOOKE%20%281%20ACESSO%29', '_blank')">
+            <td>🎞 LOOKE (1 ACESSO)</td>
+            <td class="price">R$ 6,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20GLOBOPLAY%20%2B%20CANAIS%20%28CONTA%29', '_blank')">
+            <td>📺 GLOBOPLAY + CANAIS (CONTA)</td>
+            <td class="price">R$ 7,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20GLOBOPLAY%20%2B%20CANAIS%20%28TELA%29', '_blank')">
+            <td>📺 GLOBOPLAY + CANAIS (TELA)</td>
+            <td class="price">R$ 4,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20GLOBOPLAY%20PREMIUM%20%2B%20PREMIERE', '_blank')">
+            <td>📺 GLOBOPLAY PREMIUM + PREMIERE</td>
+            <td class="price">R$ 12,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20GLOBOPLAY%20PREMIUM%20%2B%20TELECINE', '_blank')">
+            <td>📺 GLOBOPLAY PREMIUM + TELECINE</td>
+            <td class="price">R$ 10,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20GLOBOPLAY%20PREMIUM%20%2B%20TELECINE%20%2B%20PREMIERE', '_blank')">
+            <td>📺 GLOBOPLAY PREMIUM + TELECINE + PREMIERE</td>
+            <td class="price">R$ 15,00</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PREMIERE%20PLAY', '_blank')">
+            <td>⚽ PREMIERE PLAY</td>
+            <td class="price">R$ 10,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20PLAYPLUS%20%281%20ACESSO%29', '_blank')">
+            <td>📺 PLAYPLUS (1 ACESSO)</td>
+            <td class="price">R$ 4,50</td>
+          </tr>
+          <tr tabindex="0" onclick="window.open('https://wa.me/5599991827705?text=Olá,%20quero%20comprar%20APPLE%20TV%20%281%20ACESSO%29', '_blank')">
+            <td>🍏 APPLE TV (1 ACESSO)</td>
+            <td class="price">R$ 7,50</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="font-weight:700; color:#b91c1c; text-align:center; padding:1.5rem 2.5rem; white-space: pre-line;">
+              🔥 E NÃO PARA POR AÍ! 🔥<br>
+              📺 TEMOS IPTV<br>
+              💰 A PARTIR DE R$ 25,00/mês<br>
+              ⚡ VENHA FAZER SEU TESTE!
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
+```
+
+Se precisar, é só me avisar que faço qualquer ajuste!
